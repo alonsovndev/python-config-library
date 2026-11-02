@@ -1,0 +1,68 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "profileconf"
+version = "0.1.0"
+description = "Spring-style profile configuration for Python: per-profile YAML files, .env support and ${VAR:default} interpolation."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.10"
+authors = [{ name = "alonsovndev" }]
+keywords = ["configuration", "config", "profiles", "yaml", "dotenv", "environment", "spring"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Typing :: Typed",
+]
+dependencies = [
+    "PyYAML>=6.0",
+    "python-dotenv>=1.0",
+]
+
+[project.optional-dependencies]
+pydantic = ["pydantic>=2"]
+
+[project.urls]
+Homepage = "https://github.com/alonsovndev/python-config-library"
+Issues = "https://github.com/alonsovndev/python-config-library/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/profileconf"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = [
+    "E", "W", "F", "I", "B", "C4", "UP", "ARG", "SIM", "TC", "PTH", "RUF", "N",
+    "S", "DTZ", "T20", "PIE", "COM", "Q", "RET",
+]
+ignore = [
+    "E501",
+    "COM812",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S101", "S105", "S106", "ARG001"]
+"examples/**" = ["T201"]
+
+[tool.mypy]
+strict = true
+files = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--strict-markers"
+filterwarnings = ["error"]

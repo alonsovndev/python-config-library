@@ -1,0 +1,13 @@
+app:
+  name: demo-api
+  frontend_base_url: ${FRONTEND_BASE_URL:http://localhost:5173}
+
+persistence:
+  postgres:
+    host: localhost
+    port: ${DB_PORT:5432}
+    password: ${DB_PASSWORD:local-only-password}
+
+cors:
+  origins: ${CORS_ORIGINS:http://localhost:5173,http://127.0.0.1:5173}
+  allow_credentials: ${CORS_ALLOW_CREDENTIALS:true}
